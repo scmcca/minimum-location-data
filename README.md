@@ -1,2 +1,2 @@
 # minimum-location-data
-Calculate minimum timeframe needed to collect location data for activity space estimation using a reference sample.
+Calculate the minimum timeframe needed to collect human location data for activity space estimation using a reference sample.
