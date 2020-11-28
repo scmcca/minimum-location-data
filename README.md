@@ -6,11 +6,11 @@ Calculate the minimum number of days needed to collect human location data for a
 
 | Column name | Type | Description |
 | ----- | ----- | ----- |
-| id | Integer | Integer that identifies a participant. |
-| date | YYYY-MM-DD | Date that the location was recorded. |
-| duration_s | Integer | Time duration in seconds spent at the location.  |
-| lat | Latitude | Latitude of the location. |
-| lon | Longitude | Longitude of the location. |
+| `id` | Integer | Integer that identifies a participant. |
+| `date` | YYYY-MM-DD | Date that the location was recorded. |
+| `duration_s` | Integer | Time duration in seconds spent at the location.  |
+| `lat` | Latitude | Latitude of the location. |
+| `lon` | Longitude | Longitude of the location. |
 
 ## Output
 ![](Rplot02.png)
