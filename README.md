@@ -4,7 +4,7 @@ Calculate the minimum number of days needed to collect human location data for a
 ## Input 
 `minimum-location-data.R` reads a  CSV file of time-weighted location data from multiple participants over a common series of dates. The specification is:
 
-| Field | Type | Description |
+| Field name | Type | Description |
 | ----- | ----- | ----- |
 | id | Integer | Integer that identifies a participant. |
 | date | YYYY-MM-DD | Date that the location was recorded. |
