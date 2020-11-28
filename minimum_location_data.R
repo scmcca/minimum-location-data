@@ -4,22 +4,25 @@ library(rgdal)
 library(LaplacesDemon)
 library(data.table)
 
+#read data
 setwd("~/Documents/R/data/TRB2021-data")
 g <- read.csv("g.csv")
 
-## add sort order for id and date
-
+#projected geographic coordinates
 coordinates(g) <- ~lon+lat
 proj4string(g) <- CRS("+init=epsg:4326")
 CRS.new <- CRS("+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0
 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
 g <- spTransform(g, CRS.new)
 
+#split by separate participants and date
 list <- list()
 list <- split(g, interaction(g$id,g$date))
 
+#set raster cell size 
 cs <- 500
 
+#generate rasters
 rasterList <- list()
 for (i in seq_along(list)){
   r <- values(
@@ -48,6 +51,7 @@ for (i in seq_along(id)) {
   )
 }
 
+#unwind raster images into probability distribution vectors
 probVec <- as.data.frame(rasterList)
 colnames(probVec) <- unique(
   as.vector(
@@ -61,7 +65,7 @@ for (i in seq_along(unique(id))) {
   pvGroup[[i]] <- probVec[ , grepl(x, names(probVec), perl = TRUE) ]
 }
 
-## cumulative for each nested list
+#cumulative probability distribution vectors
 cumulativeList <- list()
 temp <- list()
 for (i in seq_along(pvGroup)) {
@@ -71,6 +75,7 @@ for (i in seq_along(pvGroup)) {
   cumulativeList[[i]] <- temp
 }
 
+#calculate kullback-leibler divergence
 KLDl <- list()
 KLDtemp <- list()
 pypx <- list()
@@ -93,7 +98,7 @@ for (i in seq_along(KLDl)) {
 
 KLD <- setDT(KLDl, keep.rownames = TRUE)[]
 
-#visualization
+#visualization data management
 ncolumns <- length(KLDl[[1]])
 m <- matrix(NA, length(KLDl), ncolumns)
 for (i in 1:ncolumns) {
@@ -121,8 +126,7 @@ for (i in seq_along(mdd)) {
 }
 for (i in seq_along(mdp)) {
   mdf <- append(mdf,
-                all(mdp[i:length(mdp)] < 0.05)==TRUE
-  )
+                all(mdp[i:length(mdp)] < 0.05)==TRUE)
 }
 
 #plot
@@ -131,8 +135,7 @@ boxplot(m,
         ylab = "Kullback-Leibler divergence",
         main = "Point of marginal information gain",
         col=NULL,
-        names = seq_along(KLD[[1]])+1
-        )
+        names = seq_along(KLD[[1]])+1)
 text(length(KLD[[1]])+0.5,(max(m)-0.05*(max(m))), sprintf("Cell size: %d m", cs), cex=1, pos=2)
 
 abline(
