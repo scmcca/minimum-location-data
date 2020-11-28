@@ -98,7 +98,7 @@ for (i in seq_along(KLDl)) {
 
 KLD <- setDT(KLDl, keep.rownames = TRUE)[]
 
-#visualization data management
+#point of marginal information gain
 ncolumns <- length(KLDl[[1]])
 m <- matrix(NA, length(KLDl), ncolumns)
 for (i in 1:ncolumns) {
