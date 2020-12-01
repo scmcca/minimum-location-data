@@ -2,7 +2,7 @@
 Calculate the minimum number of days needed to collect location data for activity space research using a study sample.
 
 ## Input 
-[`minimum-location-data.R`](https://github.com/scmcca/minimum-location-data/blob/main/minimum_location_data.R) reads a  CSV file of time-weighted location data from on or many participants over a common series of dates. The specification is:
+[`minimum-location-data.R`](https://github.com/scmcca/minimum-location-data/blob/main/minimum_location_data.R) reads a  CSV file of time-weighted location data from one or many participants over a common series of dates. The specification is:
 
 | Column name | Type | Description |
 | ----- | ----- | ----- |
