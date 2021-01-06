@@ -12,7 +12,7 @@ g <- read.csv("g.csv")
 coordinates(g) <- ~lon+lat
 proj4string(g) <- CRS("+init=epsg:4326")
 #the default projection is epsg:32198
-#find the proj4 code relevant for the projection that fits the input data at https://spatialreference.org/
+#find the proj4 code relevant for the projection that fits the input data at spatialreference.org
 #replace below in CRS()
 CRS.new <- CRS("+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0
 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
